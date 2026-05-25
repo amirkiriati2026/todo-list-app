@@ -33,11 +33,13 @@ h1 {
 .input-section {
     display: flex;
     gap: 10px;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
 }
 
 #todoInput {
     flex: 1;
+    min-width: 150px;
     padding: 12px 15px;
     border: 2px solid #ddd;
     border-radius: 5px;
@@ -45,7 +47,17 @@ h1 {
     transition: border-color 0.3s;
 }
 
-#todoInput:focus {
+#dueDateInput {
+    padding: 12px 15px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: border-color 0.3s;
+    cursor: pointer;
+}
+
+#todoInput:focus,
+#dueDateInput:focus {
     outline: none;
     border-color: #667eea;
 }
@@ -60,6 +72,7 @@ h1 {
     font-size: 1em;
     font-weight: bold;
     transition: background 0.3s;
+    white-space: nowrap;
 }
 
 #addBtn:hover {
@@ -68,6 +81,32 @@ h1 {
 
 #addBtn:active {
     transform: scale(0.98);
+}
+
+.sort-btn {
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+    background: #f0f0f0;
+    color: #333;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-bottom: 15px;
+    transition: all 0.3s;
+}
+
+.sort-btn:hover {
+    background: #e8e8e8;
+    border-color: #667eea;
+}
+
+.sort-btn.active {
+    background: #667eea;
+    color: white;
+    border-color: #667eea;
 }
 
 .todo-list {
@@ -105,12 +144,48 @@ h1 {
     height: 20px;
     cursor: pointer;
     accent-color: #667eea;
+    flex-shrink: 0;
+}
+
+.todo-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 .todo-text {
-    flex: 1;
     color: #333;
     word-break: break-word;
+}
+
+.due-date {
+    font-size: 0.85em;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 3px;
+    display: inline-block;
+    width: fit-content;
+}
+
+.due-date.overdue {
+    background: #ffe0e0;
+    color: #c41e3a;
+}
+
+.due-date.due-soon {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.due-date.due-later {
+    background: #d4edda;
+    color: #155724;
+}
+
+.due-date.no-date {
+    background: #e9ecef;
+    color: #6c757d;
 }
 
 .delete-btn {
@@ -122,6 +197,7 @@ h1 {
     cursor: pointer;
     font-size: 0.9em;
     transition: background 0.3s;
+    flex-shrink: 0;
 }
 
 .delete-btn:hover {
@@ -145,6 +221,18 @@ h1 {
     font-weight: bold;
 }
 
+@media (max-width: 600px) {
+    .input-section {
+        flex-direction: column;
+    }
+
+    #todoInput,
+    #dueDateInput,
+    #addBtn {
+        width: 100%;
+    }
+}
+
 @media (max-width: 400px) {
     .container {
         padding: 20px;
@@ -155,11 +243,11 @@ h1 {
         margin-bottom: 20px;
     }
 
-    .input-section {
-        flex-direction: column;
+    .sort-btn {
+        font-size: 0.85em;
     }
 
-    #addBtn {
-        width: 100%;
+    .due-date {
+        font-size: 0.8em;
     }
 }
